@@ -1,13 +1,28 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"coral-island-crop-planner-backend/config"
+	"coral-island-crop-planner-backend/internal/handlers"
+	"coral-island-crop-planner-backend/internal/repository"
+	"coral-island-crop-planner-backend/internal/services"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
-	router := gin.Default()
-	router.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Pinged",
-		})
-	})
-	router.Run() // listens on 0.0.0.0:8080 by default
+	// 1. DB Connection
+	db := config.ConnectDB()
+
+	// Dependency Injection following by orders of the layers
+	cropRepo := repository.NewCropRepository(db)
+	cropService := services.NewCropService(cropRepo)
+	cropHandler := handlers.NewCropHandler(cropService)
+
+	r := gin.Default()
+
+	// Routes
+	r.GET("/crops", cropHandler.GetAllCrops)
+
+	// Run on this port
+	r.Run(":8080")
 }
