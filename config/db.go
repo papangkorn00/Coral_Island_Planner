@@ -17,7 +17,7 @@ func ConnectDB() *gorm.DB {
 	// 1. Load .env file
 	err := godotenv.Load()
 	if err != nil {
-		log.Println("Warning: .env file not found. Using system env variables.")
+		panic("Error loading .env file")
 	}
 
 	// 2. Data Source Name
@@ -42,5 +42,5 @@ func ConnectDB() *gorm.DB {
 	DB = db
 	log.Println("PostgreSQL connected successfully!")
 
-	return db
+	return DB
 }
