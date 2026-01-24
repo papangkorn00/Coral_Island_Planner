@@ -4,6 +4,7 @@ import (
 	"coral-island-crop-planner-backend/config"
 	"coral-island-crop-planner-backend/internal/handlers"
 	"coral-island-crop-planner-backend/internal/repository"
+	"coral-island-crop-planner-backend/internal/routes"
 	"coral-island-crop-planner-backend/internal/services"
 
 	"github.com/gin-gonic/gin"
@@ -20,8 +21,7 @@ func main() {
 
 	r := gin.Default()
 
-	// Routes
-	r.GET("/crops", cropHandler.GetAllCrops)
+	routes.SetupRoutes(r, cropHandler)
 
 	// Run on this port
 	r.Run(":8080")
