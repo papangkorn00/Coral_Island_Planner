@@ -1,5 +1,11 @@
+import CalculatorCropPage from "./pages/CalculatorCropPage"
+
 function App() {
-  return <div>test</div>
+  return (
+    <div className="min-h-screen">
+      <CalculatorCropPage />
+    </div>
+  )
 }
 
 export default App
