@@ -5,7 +5,10 @@ export interface CalculatorInput {
     currentDay: number;
     townRank: "F" | "E" | "D" | "C" | "B" | "A";
     farmSize: number;
+    targetQuality: CropQuality;
 }
+
+export type CropQuality = "Base" | "Bronze" | "Silver" | "Gold" | "Osmium";
 
 export interface CalculatorOutput {
     crop: Crop
