@@ -5,6 +5,7 @@ type Crop struct {
 	Name               string `json:"name"`
 	Season             string `json:"season"`
 	GrowthTimeDay      int    `json:"growthTimeDay"`
+	ReGrowthTimeDay      int    `json:"reGrowthTimeDay"`
 	PossibleMaxHarvest int    `json:"possibleMaxHarvest"`
 	ImageURL           string `json:"imageURL"`
 	PriceBase          int    `json:"buyPriceBase"`
