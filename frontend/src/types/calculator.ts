@@ -16,10 +16,11 @@ export interface CalculatorOutput {
 
     // Time
     growthTime: number;
+    reGrowthTimeDay: number;
     harvestCount: number;
     remainingDays: number;
 
-    // Revenue
+    // Financial
     revenuePerHarvest: number;
     totalRevenue: number;
     netProfit: number;
