@@ -5,6 +5,7 @@ export interface Crop {
     name: string;
     season: Season
     growthTimeDay: number;
+    reGrowthTimeDay: number;
     possibleMaxHarvest: number;
     imageURL: string;
     buyPriceBase: number;

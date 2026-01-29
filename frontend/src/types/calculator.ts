@@ -16,7 +16,6 @@ export interface CalculatorOutput {
 
     // Time
     growthTime: number;
-    reGrowthTimeDay: number;
     harvestCount: number;
     remainingDays: number;
 
