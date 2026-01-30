@@ -16,7 +16,7 @@
 }
 
 @theme {
-  --background-image-island-main: url("src/assets/bg/bg-image.avif");
+  --background-image-island-main: url("src/assets/images/bg-image.avif");
   --font-coral-reef: "CoralReefFont", sans-serif;
 }
 
