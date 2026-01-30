@@ -15,9 +15,14 @@ var DB *gorm.DB
 
 func ConnectDB() *gorm.DB {
 	// 1. Load .env file
-	err := godotenv.Load()
-	if err != nil {
-		panic("Error loading .env file")
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	panic("Error loading .env file")
+	// }
+	if err := godotenv.Load(); err != nil {
+		if err := godotenv.Load("../.env"); err != nil {
+			fmt.Println("Note: .env file not found. Relying on System Environment Variables.")
+		}
 	}
 
 	// 2. Data Source Name
