@@ -1,11 +1,7 @@
-import CalculatorCropPage from "./pages/CalculatorCropPage"
+import CalculatorCropPage from "./components/layouts/CalculatorCropPage"
 
 function App() {
-  return (
-    <div className="min-h-screen">
-      <CalculatorCropPage />
-    </div>
-  )
+  return <CalculatorCropPage />
 }
 
 export default App
