@@ -1,4 +1,4 @@
-import CalculatorCropPage from "./components/layouts/CalculatorCropPage"
+import CalculatorCropPage from "./pages/CalculatorCropPage"
 
 function App() {
   return <CalculatorCropPage />
