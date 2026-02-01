@@ -98,6 +98,7 @@
   --sidebar-ring: oklch(0.708 0 0);
   --title-main: #259393;
   --title-stroke: #d9d9d9;
+  --bg-section: #EBE7C7
 }
 
 .dark {

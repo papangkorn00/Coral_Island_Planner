@@ -1,8 +1,11 @@
 import Title from "@/components/layouts/Title"
 
 const CalculatorCropPage = () => {
-
-  return <Title />
+  return (
+    <div>
+      <Title />
+    </div>
+  )
 }
 
 export default CalculatorCropPage
