@@ -3,7 +3,7 @@ import { type Crop } from "./crop";
 export interface CalculatorInput {
     season: "Spring" | "Summer" | "Fall" | "Winter";
     currentDay: number;
-    townRank: "F" | "E" | "D" | "C" | "B" | "A";
+    townRank: "F" | "E" | "D" | "C" | "B" | "A" | "S";
     farmSize: number;
     targetQuality: CropQuality;
 }
