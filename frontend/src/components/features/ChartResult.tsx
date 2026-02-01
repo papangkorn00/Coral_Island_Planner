@@ -25,7 +25,7 @@ const ChartResult = () => {
   return (
     <div className="col-span-6 col-start-4 z-10 ">
       <div className="bg-(--bg-section) rounded-4xl h-auto p-14">
-        <ChartContainer config={chartConfig} className="w-full h-[500px]">
+        <ChartContainer config={chartConfig} className="w-full h-[200px] md:h-[500px]">
           <BarChart accessibilityLayer data={chartData}>
             <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
             {/* <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} /> */}
