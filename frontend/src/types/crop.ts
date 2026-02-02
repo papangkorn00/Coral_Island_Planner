@@ -1,4 +1,3 @@
-export type Seasons = "Spring" | "Summer" | "Fall" | "Winter";
 
 export const TOWN_RANKS = [
     { label: "F", value: "F" },
@@ -10,7 +9,18 @@ export const TOWN_RANKS = [
     { label: "S", value: "S" },
 ] as const
 
+export const SEASON = [
+    { label: "Spring", value: "Spring" },
+    { label: "Summer", value: "Summer" },
+    { label: "Fall", value: "Fall" },
+    { label: "Winter", value: "Winter" },
+] as const
+
+
+
 export type TownRankValue = (typeof TOWN_RANKS)[number]["value"];
+export type SeasonValue = (typeof SEASON)[number]["value"]
+export type Seasons = "Spring" | "Summer" | "Fall" | "Winter";
 
 export interface Crop {
     id: number;
