@@ -17,12 +17,6 @@ import {FieldLabel} from "@/components/ui/field"
 import {useState} from "react"
 
 const InputCrop = () => {
-  // const [selectedRank, setSelectedRank] = useState<TownRankValue>("F")
-  // const [selectedSeason, setSelectedSeason] = useState<SeasonValue>("Spring")
-
-  // const currentRank = TOWN_RANKS.find((rank) => rank.value === selectedRank)
-  // const currentSeason = SEASON.find((season) => season.value === selectedSeason)
-
   const [inputState, setInputState] = useState({
     selectedRank: "F" as TownRankValue,
     selectedSeason: "Spring" as SeasonValue,
