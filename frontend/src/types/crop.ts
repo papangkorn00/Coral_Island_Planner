@@ -7,14 +7,14 @@ export const TOWN_RANKS = [
     { label: "B", value: "B" },
     { label: "A", value: "A" },
     { label: "S", value: "S" },
-] as const
+]
 
 export const SEASON = [
     { label: "Spring", value: "Spring" },
     { label: "Summer", value: "Summer" },
     { label: "Fall", value: "Fall" },
     { label: "Winter", value: "Winter" },
-] as const
+]
 
 
 
@@ -25,7 +25,8 @@ export type Seasons = "Spring" | "Summer" | "Fall" | "Winter";
 export interface Crop {
     id: number;
     name: string;
-    seasons: Seasons
+    seasons: Seasons;
+    townRank: TownRankValue;
     growthTimeDay: number;
     regrowthTimeDay: number;
     possibleMaxHarvestDay: number;
