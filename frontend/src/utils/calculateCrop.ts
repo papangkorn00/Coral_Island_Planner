@@ -3,34 +3,37 @@ import type { CalculatorInput, CalculatorOutput, CropQuality } from "@/types/cal
 
 
 // วันคงเหลือ
-const getRemainingDays = (currentDay: number, seasonLength: number = 28) => {
+// input currentDay = 5 -> 28-5 = 23 + 1(present day) = 24(RemainingDays)
+export const getRemainingDays = (currentDay: number, seasonLength: number = 28) => {
     return seasonLength - currentDay + 1
 }
 
-const calculateHarvestCount = (growthTime: number, regrowthTime: number, remainingDays: number) => {
-    // ปลูกพืชนั้นไม่่ได้เพราะว่า วันใน season นั้นไม่พอ
+export const calculateHarvestCount = (growthTime: number, regrowthTime: number, remainingDays: number) => {
+    // ปลูกพืชนั้นไม่ได้เพราะว่า วันใน season นั้นไม่พอ
     if (remainingDays < growthTime) return 0;
-    // ปลูกได้ครั้งเดียว
-    if (regrowthTime <= 0) return 1
-    // ปลูกได้หลายครั้ง
-    const daysAfterFirstHarvest = remainingDays - growthTime
-    const regrowthResult = Math.floor(daysAfterFirstHarvest / regrowthTime)
+    // ปลูกได้ 1 ครั้ง
+    if (regrowthTime === 0) return 1
+    // ปลูกได้มากกว่า 1 ครั้ง
+    const daysAfterFirstHarvest = remainingDays - growthTime // 24 - 5 = 19
+    // 19/2 = 9.5 -> 10
+    const regrowthResult = Math.ceil(daysAfterFirstHarvest / regrowthTime)
 
-    return regrowthResult + 1 // บวกครั้งแรกกับครั้งที่งอกใหม่ด้วย
+    return regrowthResult
 }
 
-const calculateTotalCost = (sellPrice: number, farmSize: number) => {
+// Total Cost of seeds * farmSize
+export const calculateTotalCost = (sellPrice: number, farmSize: number) => {
     return sellPrice * farmSize
 }
 
-const calculateRevenue = (pricePerItem: number, harvestCount: number, farmSize: number, yieldPerHarvest: number = 1) => {
+export const calculateRevenue = (pricePerItem: number, harvestCount: number, farmSize: number, yieldPerHarvest: number = 1) => {
     return pricePerItem * harvestCount * farmSize * yieldPerHarvest;
 }
 
-const helperGetPriceByQuality = (crop: Crop, quality: CropQuality) => {
+export const helperGetPriceByQuality = (crop: Crop, quality: CropQuality) => {
     switch (quality) {
         case "Bronze":
-            return crop.buyPriceBronze; // เช็คชื่อ field ใน type Crop ให้ตรงกับ DB นะครับ
+            return crop.buyPriceBronze;
         case "Silver":
             return crop.buyPriceSilver;
         case "Gold":
@@ -43,24 +46,24 @@ const helperGetPriceByQuality = (crop: Crop, quality: CropQuality) => {
     }
 }
 
-const calculateProfit = (revenue: number, cost: number): number => {
+export const calculateProfit = (revenue: number, cost: number): number => {
     return revenue - cost;
 }
 
 
 // Main Calculate
-const calculateCrop = (crop: Crop, input: CalculatorInput): CalculatorOutput => {
-    const { currentDay, farmSize, targetQuality } = input;
+export const calculateCrop = (crop: Crop, input: CalculatorInput): CalculatorOutput => {
+    const { currentDay, farmSize } = input;
     const remainingDays = getRemainingDays(currentDay)
     const harvestCount = calculateHarvestCount(crop.growthTimeDay, crop.regrowthTimeDay, remainingDays)
 
     // Seed Cost
     const seedCostTotal = calculateTotalCost(crop.seedPrice, farmSize)
     // Sell Price Per Item
-    const sellPricePerItem = helperGetPriceByQuality(crop, targetQuality)
+    const sellPricePerItem = helperGetPriceByQuality(crop, 'Base')
     // Total
     const totalRevenue = calculateRevenue(sellPricePerItem, harvestCount, farmSize)
-
+    // Profits
     const netProfit = calculateProfit(totalRevenue, seedCostTotal);
 
     return {
@@ -74,14 +77,4 @@ const calculateCrop = (crop: Crop, input: CalculatorInput): CalculatorOutput => 
         totalRevenue,
         netProfit
     }
-}
-
-export {
-    getRemainingDays,
-    calculateHarvestCount,
-    calculateTotalCost,
-    calculateRevenue,
-    calculateProfit,
-    calculateCrop,
-    helperGetPriceByQuality
 }
