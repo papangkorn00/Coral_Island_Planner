@@ -14,9 +14,8 @@ export const calculateHarvestCount = (growthTime: number, regrowthTime: number, 
     // ปลูกได้ 1 ครั้ง
     if (regrowthTime === 0) return 1
     // ปลูกได้มากกว่า 1 ครั้ง
-    const daysAfterFirstHarvest = remainingDays - growthTime // 24 - 5 = 19
-    // 19/2 = 9.5 -> 10
-    const regrowthResult = Math.ceil(daysAfterFirstHarvest / regrowthTime)
+    const daysAfterFirstHarvest = remainingDays - growthTime
+    const regrowthResult = 1 + Math.floor(daysAfterFirstHarvest / regrowthTime)
 
     return regrowthResult
 }
