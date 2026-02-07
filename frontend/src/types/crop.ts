@@ -16,11 +16,10 @@ export const SEASON = [
     { label: "Winter", value: "Winter" },
 ]
 
-
-
 export type TownRankValue = (typeof TOWN_RANKS)[number]["value"];
 export type SeasonValue = (typeof SEASON)[number]["value"]
 export type Seasons = "Spring" | "Summer" | "Fall" | "Winter";
+
 
 export interface Crop {
     id: number;

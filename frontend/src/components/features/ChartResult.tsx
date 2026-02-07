@@ -1,34 +1,63 @@
-import {ChartContainer, type ChartConfig} from "@/components/ui/chart"
-import {Bar, BarChart} from "recharts"
+import {
+  ChartContainer,
+  type ChartConfig,
+  // ChartTooltip,
+  // ChartTooltipContent,
+} from "@/components/ui/chart"
+import type {CalculatorOutput} from "@/types/calculator"
+import {Bar, BarChart, XAxis, YAxis} from "recharts"
+
+interface ChartResultProps {
+  chartData: CalculatorOutput[]
+}
 
 const chartConfig = {
-  desktop: {
+  netProfit: {
     label: "Desktop",
     color: "#2563eb",
   },
-  // mobile: {
-  //   label: "Mobile",
-  //   color: "#60a5fa",
-  // },
 } satisfies ChartConfig
 
-const chartData = [
-  {month: "January", desktop: 186, mobile: 80},
-  {month: "February", desktop: 305, mobile: 200},
-  {month: "March", desktop: 237, mobile: 120},
-  {month: "April", desktop: 73, mobile: 190},
-  {month: "May", desktop: 209, mobile: 130},
-  {month: "June", desktop: 214, mobile: 140},
-]
+const ChartResult = ({chartData}: ChartResultProps) => {
+  const maxValue = Math.max(...chartData.map((d) => d.netProfit), 0)
+  const step = 10
+  const maxTick = Math.ceil(maxValue / step) * step
+  const customTicks = Array.from(
+    {length: maxTick / step + 1},
+    (_, i) => i * step,
+  )
 
-const ChartResult = () => {
   return (
     <div className="col-span-10 md:col-span-6 col-start-2 md:col-start-4 z-10">
       <div className="bg-(--bg-section) rounded-4xl h-auto p-14">
-        <ChartContainer config={chartConfig} className="w-full h-[200px] sm:h-[350px] md:h-[500px]">
+        <ChartContainer
+          config={chartConfig}
+          className="w-full h-[200px] sm:h-[350px] md:h-[500px]"
+        >
           <BarChart accessibilityLayer data={chartData}>
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-            {/* <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} /> */}
+            <XAxis
+              dataKey="crop.name"
+              tickMargin={10}
+              // tickFormatter={(value) => value.slice(0, 3)}
+              tickLine={false}
+              axisLine={false}
+            />
+            <YAxis
+              dataKey="netProfit"
+              domain={[0, "auto"]}
+              ticks={customTicks}
+              label={{
+                value: "Net Profits",
+                position: "insideLeft",
+                dx: 0,
+                dy: 10,
+                angle: -90,
+              }}
+            />
+
+            {/* <ChartTooltip content={<ChartTooltipContent />} /> */}
+
+            <Bar dataKey="netProfit" fill="var(--color-netProfit)" radius={4} />
           </BarChart>
         </ChartContainer>
       </div>

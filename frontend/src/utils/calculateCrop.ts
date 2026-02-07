@@ -50,6 +50,8 @@ export const calculateProfit = (revenue: number, cost: number): number => {
 }
 
 
+
+
 // Main Calculate
 export const calculateCrop = (crop: Crop, input: CalculatorInput): CalculatorOutput => {
     const { currentDay, farmSize } = input;
