@@ -1,5 +1,4 @@
-import { type Crop } from "@/types/crop";
-import type { CalculatorInput, CalculatorOutput, CropQuality } from "@/types/calculator";
+import { type CalculatorInput, type CalculatorOutput, type Crop, type CropQuality } from "@/types/crop";
 
 
 // วันคงเหลือ
@@ -20,9 +19,9 @@ export const calculateHarvestCount = (growthTime: number, regrowthTime: number, 
     return regrowthResult
 }
 
-// Total Cost of seeds * farmSize
-export const calculateTotalCost = (sellPrice: number, farmSize: number) => {
-    return sellPrice * farmSize
+// Total Cost of seedPrice * farmSize
+export const calculateTotalCost = (seedPrice: number, farmSize: number) => {
+    return seedPrice * farmSize
 }
 
 export const calculateRevenue = (pricePerItem: number, harvestCount: number, farmSize: number, yieldPerHarvest: number = 1) => {
@@ -76,6 +75,6 @@ export const calculateCrop = (crop: Crop, input: CalculatorInput): CalculatorOut
         remainingDays,
         revenuePerHarvest: sellPricePerItem * farmSize, // รายได้ต่อการเก็บ 1 รอบ
         totalRevenue,
-        netProfit
+        netProfit,
     }
 }

@@ -37,3 +37,32 @@ export interface Crop {
     buyPriceOsmium: number;
     seedPrice: number;
 }
+
+export interface CalculatorInput {
+    season: SeasonValue;
+    currentDay: number;
+    townRank: TownRankValue;
+    farmSize: number;
+    // targetQuality?: CropQuality;
+}
+
+export type CropQuality = "Base" | "Bronze" | "Silver" | "Gold" | "Osmium";
+
+export interface CalculatorOutput {
+    crop: Crop
+
+    // Plant
+    plantCount: number;
+    seedCostTotal: number;
+
+    // Time
+    growthTime: number;
+    harvestCount: number;
+    remainingDays: number;
+
+    // Financial
+    revenuePerHarvest: number;
+    totalRevenue: number;
+    netProfit: number;
+}
+
