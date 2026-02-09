@@ -1,21 +1,19 @@
 import Title from "@/components/layouts/Title"
 import ChartResult from "@/components/features/ChartResult"
 import InputCrop from "@/components/features/InputCrop"
-import type {CalculatorInput} from "@/types/calculator"
 import {useEffect, useState, useMemo} from "react"
-import {TOWN_RANKS, type Crop} from "@/types/crop"
+import {TOWN_RANKS, type CalculatorInput, type Crop} from "@/types/crop"
 import {getCrops} from "@/api/api"
 import {calculateCrop} from "@/utils/calculateCrop"
 
 const CalculatorCropPage = () => {
-  const [inputs] = useState<CalculatorInput>({
+  const [crops, setCrops] = useState<Crop[]>([])
+  const [inputs, setInputs] = useState<CalculatorInput>({
     townRank: "F",
     season: "Spring",
-    currentDay: 5,
-    farmSize: 2,
+    currentDay: 1,
+    farmSize: 5,
   })
-
-  const [crops, setCrops] = useState<Crop[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +42,15 @@ const CalculatorCropPage = () => {
       .sort((a, b) => b.netProfit - a.netProfit)
   }, [crops, inputs])
 
-  console.log(chartDataCalculate)
+  const handleInputs = (
+    key: keyof CalculatorInput,
+    value: CalculatorInput[keyof CalculatorInput],
+  ) => {
+    setInputs((prev) => ({
+      ...prev,
+      [key]: value,
+    }))
+  }
 
   return (
     <div className="relative min-h-screen bg-island-main bg-cover bg-center bg-fixed bg-no-repeat">
@@ -53,7 +59,7 @@ const CalculatorCropPage = () => {
         <Title />
 
         <ChartResult chartData={chartDataCalculate} />
-        <InputCrop />
+        <InputCrop inputData={inputs} onUpdateInput={handleInputs} />
       </div>
     </div>
   )

@@ -4,8 +4,9 @@ import {
   // ChartTooltip,
   // ChartTooltipContent,
 } from "@/components/ui/chart"
-import type {CalculatorOutput} from "@/types/calculator"
-import {Bar, BarChart, XAxis, YAxis} from "recharts"
+import {Bar, BarChart, XAxis, YAxis, Cell, ReferenceLine} from "recharts"
+import {CustomXAxisTick} from "./CustomXAxisTick"
+import type { CalculatorOutput } from "@/types/crop"
 
 interface ChartResultProps {
   chartData: CalculatorOutput[]
@@ -34,30 +35,45 @@ const ChartResult = ({chartData}: ChartResultProps) => {
           config={chartConfig}
           className="w-full h-[200px] sm:h-[350px] md:h-[500px]"
         >
-          <BarChart accessibilityLayer data={chartData}>
+          <BarChart
+            margin={{
+              bottom: 20,
+            }}
+            accessibilityLayer
+            data={chartData}
+          >
             <XAxis
               dataKey="crop.name"
-              tickMargin={10}
+              tickMargin={5}
               // tickFormatter={(value) => value.slice(0, 3)}
               tickLine={false}
               axisLine={false}
+              tick={CustomXAxisTick}
             />
             <YAxis
               dataKey="netProfit"
-              domain={[0, "auto"]}
+              domain={["auto", "auto"]}
               ticks={customTicks}
               label={{
                 value: "Net Profits",
                 position: "insideLeft",
                 dx: 0,
-                dy: 10,
+                dy: 30,
                 angle: -90,
               }}
             />
 
             {/* <ChartTooltip content={<ChartTooltipContent />} /> */}
+            <ReferenceLine y={0} stroke="#000" />
 
-            <Bar dataKey="netProfit" fill="var(--color-netProfit)" radius={4} />
+            <Bar dataKey="netProfit" radius={4}>
+              {chartData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={entry.netProfit > 0 ? "#22c55e" : "#ef4444"}
+                />
+              ))}
+            </Bar>
           </BarChart>
         </ChartContainer>
       </div>

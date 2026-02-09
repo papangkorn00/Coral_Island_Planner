@@ -5,30 +5,22 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import {
-  SEASON,
-  TOWN_RANKS,
-  type SeasonValue,
-  type TownRankValue,
-} from "@/types/crop"
+import {SEASON, TOWN_RANKS, type CalculatorInput, } from "@/types/crop"
 import {ChevronDown} from "lucide-react"
 import {Input} from "@/components/ui/input"
 import {FieldLabel} from "@/components/ui/field"
-import {useState} from "react"
 
-const InputCrop = () => {
-  const [inputState, setInputState] = useState({
-    selectedRank: "F" as TownRankValue,
-    selectedSeason: "Spring" as SeasonValue,
-    currentDay: "",
-    farmSize: "",
-  })
-  const currentRank = TOWN_RANKS.find(
-    (rank) => rank.value === inputState.selectedRank,
-  )
-  const currentSeason = SEASON.find(
-    (season) => season.value === inputState.selectedSeason,
-  )
+type InputCropProps = {
+  inputData: CalculatorInput
+  onUpdateInput: (
+    key: keyof CalculatorInput,
+    value: CalculatorInput[keyof CalculatorInput],
+  ) => void
+}
+
+const InputCrop = ({inputData, onUpdateInput}: InputCropProps) => {
+  const currentRank = TOWN_RANKS.find((rank) => rank.value === inputData.townRank,)
+  const currentSeason = SEASON.find((season) => season.value === inputData.season,)
 
   return (
     <div className="col-span-6 col-start-4 z-10 mt-10">
@@ -52,12 +44,7 @@ const InputCrop = () => {
               {TOWN_RANKS.map((rank) => (
                 <DropdownMenuItem
                   key={rank.value}
-                  onSelect={() =>
-                    setInputState((prev) => ({
-                      ...prev,
-                      selectedRank: rank.value,
-                    }))
-                  }
+                  onSelect={() => onUpdateInput("townRank", rank.value)}
                 >
                   {rank.label}
                 </DropdownMenuItem>
@@ -72,7 +59,10 @@ const InputCrop = () => {
           </FieldLabel>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="flex justify-between w-[100px]">
+              <Button
+                variant="outline"
+                className="flex justify-between w-[100px]"
+              >
                 {currentSeason?.value}
                 <ChevronDown className="ml-2 h-4 w-4 opacity-50" />
               </Button>
@@ -81,12 +71,7 @@ const InputCrop = () => {
               {SEASON.map((season) => (
                 <DropdownMenuItem
                   key={season.value}
-                  onSelect={() =>
-                    setInputState((prev) => ({
-                      ...prev,
-                      selectedSeason: season.value,
-                    }))
-                  }
+                  onSelect={() => onUpdateInput("season", season.value)}
                 >
                   {season.label}
                 </DropdownMenuItem>
@@ -106,10 +91,10 @@ const InputCrop = () => {
             defaultValue={1}
             min={1}
             max={28}
-            onChange={(e) => {
-              const value = e.target.value
-              setInputState((prev) => ({...prev, currentDay: value}))
-            }}
+            value={inputData.currentDay}
+            onChange={(e) =>
+              onUpdateInput("currentDay", Number(e.target.value))
+            }
           ></Input>
         </div>
         {/* Farm size */}
@@ -123,10 +108,8 @@ const InputCrop = () => {
             type="number"
             defaultValue={1}
             min={1}
-            onChange={(e) => {
-              const value = e.target.value
-              setInputState((prev) => ({...prev, farmSize: value}))
-            }}
+            value={inputData.farmSize}
+            onChange={(e) => onUpdateInput("farmSize", Number(e.target.value))}
           ></Input>
         </div>
       </div>
