@@ -26,7 +26,10 @@ const ChartResult = ({chartData}: ChartResultProps) => {
   const customTicks = Array.from(
     {length: maxTick / step + 1},
     (_, i) => i * step,
-  )
+  )  
+
+  console.log(chartData);
+  
 
   return (
     <div className="col-span-10 md:col-span-6 col-start-2 md:col-start-4 z-10">
@@ -52,7 +55,7 @@ const ChartResult = ({chartData}: ChartResultProps) => {
             />
             <YAxis
               dataKey="netProfit"
-              domain={["auto", "auto"]}
+              domain={["dataMin", "auto"]}
               ticks={customTicks}
               label={{
                 value: "Net Profits",

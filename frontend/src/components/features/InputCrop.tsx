@@ -71,7 +71,7 @@ const InputCrop = ({inputData, onUpdateInput}: InputCropProps) => {
               {SEASON.map((season) => (
                 <DropdownMenuItem
                   key={season.value}
-                  onSelect={() => onUpdateInput("season", season.value)}
+                  onSelect={() => onUpdateInput("season", season.label)}
                 >
                   {season.label}
                 </DropdownMenuItem>
@@ -93,7 +93,7 @@ const InputCrop = ({inputData, onUpdateInput}: InputCropProps) => {
             max={28}
             value={inputData.currentDay}
             onChange={(e) =>
-              onUpdateInput("currentDay", Number(e.target.value))
+              onUpdateInput("currentDay", parseInt(e.target.value) || 1)
             }
           ></Input>
         </div>
@@ -109,7 +109,7 @@ const InputCrop = ({inputData, onUpdateInput}: InputCropProps) => {
             defaultValue={1}
             min={1}
             value={inputData.farmSize}
-            onChange={(e) => onUpdateInput("farmSize", Number(e.target.value))}
+            onChange={(e) => onUpdateInput("farmSize", parseInt(e.target.value) || 1)}
           ></Input>
         </div>
       </div>

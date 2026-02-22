@@ -39,9 +39,9 @@ export interface Crop {
 }
 
 export interface CalculatorInput {
+    townRank: TownRankValue;
     season: SeasonValue;
     currentDay: number;
-    townRank: TownRankValue;
     farmSize: number;
     // targetQuality?: CropQuality;
 }
