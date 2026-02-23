@@ -8,7 +8,7 @@ import {
 import {SEASON, TOWN_RANKS, type CalculatorInput, } from "@/types/crop"
 import {ChevronDown} from "lucide-react"
 import {Input} from "@/components/ui/input"
-import {FieldLabel} from "@/components/ui/field"
+import {FieldLabel, Field} from "@/components/ui/field"
 
 type InputCropProps = {
   inputData: CalculatorInput
@@ -24,9 +24,9 @@ const InputCrop = ({inputData, onUpdateInput}: InputCropProps) => {
 
   return (
     <div className="col-span-6 col-start-4 z-10 mt-10">
-      <div className="flex justify-center-safe items-center-safe tracking-wide gap-x-28 bg-(--bg-section) rounded-4xl h-24">
+      <div className="flex justify-center-safe items-center-safe tracking-wide gap-x-16 bg-(--bg-section) rounded-4xl p-6">
         {/* Town Ranks */}
-        <div>
+        <Field className="gap-2">
           <FieldLabel htmlFor="input-town-rank" className="font-coral-reef">
             Town Rank
           </FieldLabel>
@@ -51,9 +51,9 @@ const InputCrop = ({inputData, onUpdateInput}: InputCropProps) => {
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
+        </Field>
         {/* Season */}
-        <div>
+        <Field className="gap-2">
           <FieldLabel htmlFor="input-current-day" className="font-coral-reef">
             Season
           </FieldLabel>
@@ -78,9 +78,9 @@ const InputCrop = ({inputData, onUpdateInput}: InputCropProps) => {
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
+        </Field>
         {/* Current Day */}
-        <div>
+        <Field className="gap-2">
           <FieldLabel htmlFor="input-current-day" className="font-coral-reef">
             Current Day
           </FieldLabel>
@@ -96,9 +96,9 @@ const InputCrop = ({inputData, onUpdateInput}: InputCropProps) => {
               onUpdateInput("currentDay", parseInt(e.target.value) || 1)
             }
           ></Input>
-        </div>
+        </Field>
         {/* Farm size */}
-        <div>
+        <Field className="gap-2">
           <FieldLabel htmlFor="input-farm-size" className="font-coral-reef">
             Farm Size
           </FieldLabel>
@@ -111,7 +111,7 @@ const InputCrop = ({inputData, onUpdateInput}: InputCropProps) => {
             value={inputData.farmSize}
             onChange={(e) => onUpdateInput("farmSize", parseInt(e.target.value) || 1)}
           ></Input>
-        </div>
+        </Field>
       </div>
     </div>
   )
