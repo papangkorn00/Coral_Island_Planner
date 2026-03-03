@@ -11,7 +11,7 @@ const CalculatorCropPage = () => {
   const [inputs, setInputs] = useState<CalculatorInput>({
     townRank: "F",
     season: "Spring",
-    currentDay: 20,
+    currentDay: 1,
     farmSize: 5,
   })
 
@@ -27,7 +27,7 @@ const CalculatorCropPage = () => {
     fetchData()
   }, [])
 
-  const chartDataCalculate = useMemo(() => {    
+  const chartDataCalculate = useMemo(() => {
     return crops
       .filter((season) => season.seasons.includes(inputs.season))
       .filter((rank) => {
@@ -52,7 +52,17 @@ const CalculatorCropPage = () => {
     }))
   }
 
-    console.log(inputs);
+  console.log(inputs)
+
+  const clearInputFields = () =>{
+    setInputs(() => ({
+      townRank: "F",
+      season: "Spring",
+      currentDay: 1,
+      farmSize: 5,
+    }))
+  }
+
 
 
   return (
@@ -62,7 +72,7 @@ const CalculatorCropPage = () => {
         <Title />
 
         <ChartResult chartData={chartDataCalculate} />
-        <InputCrop inputData={inputs} onUpdateInput={handleInputs} />
+        <InputCrop onClearInputFields={clearInputFields} inputData={inputs} onUpdateInput={handleInputs} />
       </div>
     </div>
   )

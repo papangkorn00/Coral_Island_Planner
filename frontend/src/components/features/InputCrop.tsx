@@ -9,8 +9,10 @@ import {SEASON, TOWN_RANKS, type CalculatorInput, } from "@/types/crop"
 import {ChevronDown} from "lucide-react"
 import {Input} from "@/components/ui/input"
 import {FieldLabel, Field} from "@/components/ui/field"
+import {RotateCcw } from "lucide-react";
 
 type InputCropProps = {
+  onClearInputFields: () => void
   inputData: CalculatorInput
   onUpdateInput: (
     key: keyof CalculatorInput,
@@ -18,7 +20,7 @@ type InputCropProps = {
   ) => void
 }
 
-const InputCrop = ({inputData, onUpdateInput}: InputCropProps) => {
+const InputCrop = ({onClearInputFields ,inputData, onUpdateInput}: InputCropProps) => {
   const currentRank = TOWN_RANKS.find((rank) => rank.value === inputData.townRank,)
   const currentSeason = SEASON.find((season) => season.value === inputData.season,)
 
@@ -112,6 +114,10 @@ const InputCrop = ({inputData, onUpdateInput}: InputCropProps) => {
             onChange={(e) => onUpdateInput("farmSize", parseInt(e.target.value) || 1)}
           ></Input>
         </Field>
+        
+        <Button className="cursor-pointer" size="icon" variant="destructive" onClick={onClearInputFields}>
+          <RotateCcw />
+        </Button>
       </div>
     </div>
   )
