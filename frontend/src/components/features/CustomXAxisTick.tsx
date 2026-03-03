@@ -9,7 +9,9 @@ export const CustomXAxisTick = ({
     value: string
   }
 }) => {
-  const cropImage = `images/crops/${payload.value.toLowerCase().trim().replace(/\s+/g, '-')}.png`
+  const cropImage = `images/crops/${payload.value.toLowerCase().trim().replace(/\s+/g, ' ')}.png`
+  console.log(cropImage);
+  
 
   return (
     <g transform={`translate(${x},${y})`}>
