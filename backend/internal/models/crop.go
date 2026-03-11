@@ -8,7 +8,7 @@ type Crop struct {
 	Seasons               pq.StringArray `gorm:"type:text[]" json:"seasons"`
 	TownRank              string         `json:"townRank"`
 	GrowthTimeDay         int            `json:"growthTimeDay"`
-	RegrowthTimeDay       int            `json:"regrowthTimeDay"`
+	RegrowthTimeDay       int            `json:"regrowthTimeDay" gorm:"column:re_growth_time_day"`
 	PossibleMaxHarvestDay int            `json:"possibleMaxHarvestDay"`
 	ImageURL              string         `json:"imageURL"`
 	SeedPrice             int            `json:"seedPrice"`
