@@ -4,7 +4,7 @@ import './index.css'
 import App from "./App"
 
 ReactDOM.hydrateRoot(
-  document.getElementById("root") as HTMLElement,
+  document.getElementById("app") as HTMLElement,
   <StrictMode>
     <App />
   </StrictMode>,
