@@ -3,10 +3,10 @@ package main
 import (
 	"coral-island-crop-planner-backend/config"
 	"coral-island-crop-planner-backend/internal/handlers"
+	"coral-island-crop-planner-backend/internal/models"
 	"coral-island-crop-planner-backend/internal/repository"
 	"coral-island-crop-planner-backend/internal/routes"
 	"coral-island-crop-planner-backend/internal/services"
-	"coral-island-crop-planner-backend/internal/models"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -26,7 +26,7 @@ func main() {
 	r := gin.Default()
 
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:  []string{"http://localhost:5173"},
+		AllowOrigins:  []string{"http://localhost:5173", "http://20.2.88.247"},
 		AllowMethods:  []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
 		AllowHeaders:  []string{"Origin", "Content-Type", "Accept", "Authorization"},
 		ExposeHeaders: []string{"Content-Length"},
