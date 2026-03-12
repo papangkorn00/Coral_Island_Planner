@@ -27,5 +27,14 @@ services:
       DB_NAME: ${DB_NAME}
       DB_PORT: 5432
 
+  frontend:
+    build: ./frontend
+    restart: always
+    container_name: frontend
+    ports:
+      - "80:5173"
+    depends_on:
+      - backend
+
 volumes:
   pg_data:
