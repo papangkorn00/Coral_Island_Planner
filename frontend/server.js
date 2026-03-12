@@ -2,7 +2,6 @@ import fs from "node:fs"
 import path from "node:path"
 import {fileURLToPath} from "node:url"
 import express from "express"
-import {createServer as createViteServer} from "vite"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -53,6 +52,13 @@ async function createServer() {
         // required, and provides efficient invalidation similar to HMR.
         const module = await vite.ssrLoadModule("/src/entry-server.tsx")
         render = module.render
+      } else {
+        template = fs.readFileSync(
+          path.resolve(__dirname, "dist/client/index.html"),
+          "utf-8",
+        )
+        const module = await import("./dist/server/entry-server.js")
+        render = module.render
       }
 
       const stream = await render()
@@ -75,8 +81,10 @@ async function createServer() {
   })
 
   app.listen(port, () => {
-        console.log(`🚀 Server started at http://localhost:${port} (Mode: ${isProduction ? 'Production' : 'Development'})`)
-    })
+    console.log(
+      `Server started at http://localhost:${port} (Mode: ${isProduction ? "Production" : "Development"})`,
+    )
+  })
 }
 
 createServer()
