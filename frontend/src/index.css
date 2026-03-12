@@ -3,7 +3,7 @@
 
 @font-face {
   font-family: "CoralReefFont";
-  src: url("src/assets/fonts/CoralReef.otf") format("opentype");
+  src: url("/fonts/CoralReef.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
@@ -16,7 +16,7 @@
 }
 
 @theme {
-  --background-image-island-main: url("src/assets/images/bg-image.avif");
+  --background-image-island-main: url("/images/bg-images/bg-image.avif");
   --font-coral-reef: "CoralReefFont", sans-serif;
 }
 
