@@ -4,8 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "bunx --bun vite",
-    "build": "tsc -b && vite build",
+    "dev": "bun server.js",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
+    "build": "tsc -b && bun run build:client && bun run build:server",
     "lint": "eslint .",
     "preview": "vite preview"
   },
